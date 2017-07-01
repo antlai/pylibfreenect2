@@ -126,6 +126,12 @@ OpenCLKdePacketPipeline
 .. autoclass:: OpenCLKdePacketPipeline
     :members:
 
+CudaKdePacketPipeline
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: CudaKdePacketPipeline
+    :members:
+
 OpenGLPacketPipeline
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -990,6 +996,7 @@ cdef class PacketPipeline:
     pylibfreenect2.libfreenect2.CpuPacketPipeline
     pylibfreenect2.libfreenect2.OpenCLPacketPipeline
     pylibfreenect2.libfreenect2.OpenCLKdePacketPipeline
+    pylibfreenect2.libfreenect2.CudaKdePacketPipeline
     pylibfreenect2.libfreenect2.OpenGLPacketPipeline
     """
     cdef libfreenect2.PacketPipeline* pipeline_ptr_alias
