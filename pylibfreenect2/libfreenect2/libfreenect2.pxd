@@ -127,7 +127,7 @@ cdef extern from "libfreenect2/packet_pipeline.h" namespace "libfreenect2":
     cdef cppclass OpenCLKdePacketPipeline:
         OpenCLKdePacketPipeline(const int)
 
-    cdef cppclass CudaCLKdePacketPipeline:
+    cdef cppclass CudaKdePacketPipeline:
         CudaKdePacketPipeline(const int)
 
 
