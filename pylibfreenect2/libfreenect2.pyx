@@ -884,6 +884,36 @@ cdef class Registration:
         self.ptr.getPointXYZ(undistorted.ptr, r, c, x, y, z)
         return (x, y, z)
 
+    @cython.boundscheck(False)  # Deactivate bounds checking
+    @cython.wraparound(False)   # Deactivate negative indexing.
+    def getPointArrayXYZ(self, Frame undistorted, int [:,:] p):
+        """Same as ``libfreenect2::Registration::getPointArrayXYZ``.
+
+        Parameters
+        ----------
+        undistorted : Frame
+            ``(512, 424)`` Undistorted depth frame
+
+        p : 2-D numpy array of [row, column] pairs
+
+        Returns
+        -------
+        2d numpy array of floats [X,Y,Z] triplets
+
+        """
+        cdef Py_ssize_t nRows = p.shape[0];
+        if p.shape[1] != 2 :
+            raise ValueError("Only row/column pairs")
+        cdef float x = 0, y = 0, z = 0
+        h_np =  np.zeros([nRows, 3], dtype=np.float32)
+        cdef float [:,:] h = h_np
+        for i in range(nRows):
+            self.ptr.getPointXYZ(undistorted.ptr, p[i, 0], p[i, 1], x, y, z)
+            h[i, 0] = x
+            h[i, 1] = y
+            h[i, 2] = z
+        return h_np
+
 
 cdef class Logger:
     """Python interface for libfreenect2::Logger
